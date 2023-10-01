@@ -1,0 +1,26 @@
+.page-content-wrapper {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.page-content-wrapper .page-content {
+  padding: 0;
+}
+.page-content-wrapper .page-content.is-relative {
+  position: relative;
+}
+.page-content-wrapper .page-content.kanban-content {
+  padding: 0 20px;
+}
+.page-content-wrapper .page-content.chat-content {
+  padding: 0;
+}
+.page-content-wrapper .page-content.card-content {
+  padding: 0 20px;
+}
+.page-content-wrapper .page-content.waterfall-content {
+  overflow: hidden;
+}
+.page-content-wrapper .page-content.projects-content {
+  padding: 0;
+}

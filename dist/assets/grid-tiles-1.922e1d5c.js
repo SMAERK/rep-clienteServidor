@@ -1,0 +1,180 @@
+import { _ as __unplugin_components_4 } from "./UserCardDropdown.f26fcac6.js";
+import { _ as _sfc_main$5 } from "./VAvatar.08652fea.js";
+import { _ as _sfc_main$4 } from "./VPlaceholderPage.bdc25b05.js";
+import { b as _sfc_main$3 } from "./index.e178843f.js";
+import { _ as _sfc_main$2 } from "./VField.b8c33879.js";
+import { _ as __unplugin_components_1 } from "./VControl.eb555562.js";
+import { d as defineComponent, k as ref, e as computed, z as resolveComponent, o as openBlock, f as createElementBlock, q as createBaseVNode, s as createVNode, w as withCtx, a3 as withDirectives, a4 as vModelText, g as normalizeClass, h as unref, F as Fragment, X as renderList, t as toDisplayString, aK as TransitionGroup, a1 as useHead } from "./vendor.6548d360.js";
+import { _ as _imports_0, a as _imports_1 } from "./search-6-dark.b48abad5.js";
+import { u as useViewWrapper } from "./viewWrapper.d4aba839.js";
+import "./VDropdown.38fc5e7d.js";
+import "./VIcon.de064b10.js";
+import "./useDropdown.145111f2.js";
+import "./via-placeholder.9af8280d.js";
+const users = [];
+var TilesGridV1_vue_vue_type_style_index_0_lang = "";
+const _hoisted_1$1 = { class: "tile-grid-toolbar" };
+const _hoisted_2 = { class: "buttons" };
+const _hoisted_3 = /* @__PURE__ */ createBaseVNode("span", { class: "icon" }, [
+  /* @__PURE__ */ createBaseVNode("i", {
+    "aria-hidden": "true",
+    class: "fas fa-plus"
+  })
+], -1);
+const _hoisted_4 = /* @__PURE__ */ createBaseVNode("span", null, "Add User", -1);
+const _hoisted_5 = { class: "tile-grid tile-grid-v1" };
+const _hoisted_6 = /* @__PURE__ */ createBaseVNode("img", {
+  class: "light-image",
+  src: _imports_0,
+  alt: ""
+}, null, -1);
+const _hoisted_7 = /* @__PURE__ */ createBaseVNode("img", {
+  class: "dark-image",
+  src: _imports_1,
+  alt: ""
+}, null, -1);
+const _hoisted_8 = { class: "tile-grid-item" };
+const _hoisted_9 = { class: "tile-grid-item-inner" };
+const _hoisted_10 = { class: "meta" };
+const _hoisted_11 = { class: "dark-inverted" };
+const _sfc_main$1 = /* @__PURE__ */ defineComponent({
+  setup(__props) {
+    const users$1 = users;
+    const filters = ref("");
+    const filteredData = computed(() => {
+      if (!filters.value) {
+        return users$1;
+      } else {
+        return users$1.filter((item) => {
+          var _a;
+          return item.username.match(new RegExp(filters.value, "i")) || item.location.match(new RegExp(filters.value, "i")) || item.position.match(new RegExp(filters.value, "i")) || ((_a = item.badge) == null ? void 0 : _a.match(new RegExp(filters.value, "i")));
+        });
+      }
+    });
+    const valueSingle = ref(0);
+    const optionsSingle = [
+      "All",
+      "UI/UX Design",
+      "Web Development",
+      "Software Eng.",
+      "Business"
+    ];
+    return (_ctx, _cache) => {
+      const _component_VControl = __unplugin_components_1;
+      const _component_Multiselect = resolveComponent("Multiselect");
+      const _component_VField = _sfc_main$2;
+      const _component_VButton = _sfc_main$3;
+      const _component_VPlaceholderPage = _sfc_main$4;
+      const _component_VAvatar = _sfc_main$5;
+      const _component_UserCardDropdown = __unplugin_components_4;
+      return openBlock(), createElementBlock("div", null, [
+        createBaseVNode("div", _hoisted_1$1, [
+          createVNode(_component_VControl, { icon: "feather:search" }, {
+            default: withCtx(() => [
+              withDirectives(createBaseVNode("input", {
+                "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => filters.value = $event),
+                class: "input custom-text-filter",
+                placeholder: "Search..."
+              }, null, 512), [
+                [vModelText, filters.value]
+              ])
+            ]),
+            _: 1
+          }),
+          createBaseVNode("div", _hoisted_2, [
+            createVNode(_component_VField, { class: "h-hidden-mobile" }, {
+              default: withCtx(() => [
+                createVNode(_component_VControl, null, {
+                  default: withCtx(() => [
+                    createVNode(_component_Multiselect, {
+                      modelValue: valueSingle.value,
+                      "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => valueSingle.value = $event),
+                      options: optionsSingle,
+                      "max-height": 145,
+                      placeholder: "Select an option"
+                    }, null, 8, ["modelValue"])
+                  ]),
+                  _: 1
+                })
+              ]),
+              _: 1
+            }),
+            createVNode(_component_VButton, {
+              color: "primary",
+              raised: ""
+            }, {
+              default: withCtx(() => [
+                _hoisted_3,
+                _hoisted_4
+              ]),
+              _: 1
+            })
+          ])
+        ]),
+        createBaseVNode("div", _hoisted_5, [
+          createVNode(_component_VPlaceholderPage, {
+            class: normalizeClass([unref(filteredData).length !== 0 && "is-hidden"]),
+            title: "We couldn't find any matching results.",
+            subtitle: "Too bad. Looks like we couldn't find any matching results for the\n          search terms you've entered. Please try different search terms or\n          criteria.",
+            larger: ""
+          }, {
+            image: withCtx(() => [
+              _hoisted_6,
+              _hoisted_7
+            ]),
+            _: 1
+          }, 8, ["class"]),
+          createVNode(TransitionGroup, {
+            name: "list",
+            tag: "div",
+            class: "columns is-multiline"
+          }, {
+            default: withCtx(() => [
+              (openBlock(true), createElementBlock(Fragment, null, renderList(unref(filteredData), (item, key) => {
+                return openBlock(), createElementBlock("div", {
+                  key,
+                  class: "column is-4"
+                }, [
+                  createBaseVNode("div", _hoisted_8, [
+                    createBaseVNode("div", _hoisted_9, [
+                      createVNode(_component_VAvatar, {
+                        picture: item.picture,
+                        badge: item.badge,
+                        color: item.color,
+                        initials: item.initials,
+                        size: "medium"
+                      }, null, 8, ["picture", "badge", "color", "initials"]),
+                      createBaseVNode("div", _hoisted_10, [
+                        createBaseVNode("span", _hoisted_11, toDisplayString(item.username), 1),
+                        createBaseVNode("span", null, toDisplayString(item.position), 1)
+                      ]),
+                      createVNode(_component_UserCardDropdown)
+                    ])
+                  ])
+                ]);
+              }), 128))
+            ]),
+            _: 1
+          })
+        ])
+      ]);
+    };
+  }
+});
+const _hoisted_1 = { class: "page-content-inner" };
+const _sfc_main = /* @__PURE__ */ defineComponent({
+  setup(__props) {
+    const viewWrapper = useViewWrapper();
+    viewWrapper.setPageTitle("Grid Tiles 1");
+    useHead({
+      title: "Grid Tiles 1 - Sidebar - Vuero"
+    });
+    return (_ctx, _cache) => {
+      const _component_TilesGridV1 = _sfc_main$1;
+      return openBlock(), createElementBlock("div", _hoisted_1, [
+        createVNode(_component_TilesGridV1)
+      ]);
+    };
+  }
+});
+export { _sfc_main as default };

@@ -1,0 +1,6 @@
+.is-divider[data-v-fd00c79a]::after {
+  background: var(--background-grey);
+}
+.is-dark .is-divider[data-v-fd00c79a]::after {
+  background: var(--dark-sidebar-light-10);
+}
