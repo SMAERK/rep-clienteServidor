@@ -31,6 +31,7 @@ const form = ref({
 	dob: "",
 	email: "",
 	password: "",
+	phone: "",
 });
 
 const handleLogin = async () => {
