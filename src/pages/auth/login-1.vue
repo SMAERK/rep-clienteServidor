@@ -26,6 +26,9 @@ const { locale, t } = useI18n();
 const defaultLocale = useStorage("locale", navigator?.language || "es-MX");
 
 const form = ref({
+	name: "",
+	last_name: "",
+	dob: "",
 	email: "",
 	password: "",
 });
@@ -95,19 +98,18 @@ watch(locale, () => {
 			</div>
 			<div class="column is-relative is-6">
 				<div class="hero is-fullheight is-image">
-					<div class="hero-body" style="background-color: #0c7083; justify-content: center">
+					<div class="hero-body" style="background-color: #c4a549; justify-content: center">
 						<div class="container">
 							<div class="columns h-hidden-desktop" style="justify-content: center">
 								<img
 									class="hero-image"
-									src="/@src/assets/illustrations/login/logoCreciendo.svg"
+									src="/@src/assets/illustrations/login/Logo-IBERO-nuevo.pndg"
 									alt=""
 								/>
 							</div>
 							<div class="column is-7" style="margin-left: 15%">
 								<div class="auth-content" style="text-align: center">
-									<h2 style="color: #ffff; font-size: 25px">Inicio de sesion</h2>
-									<p style="color: #ffff">Ingrese su usuario y contraseña</p>
+									<h2 style="color: #ffff; font-size: 25px">Regristro de Nuevos Estudiantes</h2>
 								</div>
 								<br />
 								<br />
@@ -117,6 +119,39 @@ watch(locale, () => {
 									<form @submit.prevent="handleLogin">
 										<div class="login-form">
 											<!-- Username -->
+											<VField>
+												<VControl icon="feather:user">
+													<input
+														v-model="form.name"
+														class="input"
+														type="text"
+														placeholder="Nombres"
+														autocomplete="username"
+													/>
+												</VControl>
+											</VField>
+											<VField>
+												<VControl icon="feather:user">
+													<input
+														v-model="form.last_name"
+														class="input"
+														type="text"
+														placeholder="Apellidos"
+														autocomplete="username"
+													/>
+												</VControl>
+											</VField>
+											<VField>
+												<VControl icon="feather:user">
+													<input
+														v-model="form.dob"
+														class="input"
+														type="date"
+														placeholder="Fecha de Nacimiento"
+														autocomplete="username"
+													/>
+												</VControl>
+											</VField>
 											<VField>
 												<VControl icon="feather:user">
 													<input
@@ -152,7 +187,7 @@ watch(locale, () => {
 													fullwidth
 													raised
 												>
-													<span style="color: #0c7083"> Ingresar </span>
+													<span style="color: #0c7083"> Registrar </span>
 												</VButton>
 											</VControl>
 										</div>
@@ -168,8 +203,9 @@ watch(locale, () => {
 				<div class="container">
 					<div class="columns" style="justify-content: center">
 						<img
+							style="width: 50%"
 							class="hero-image"
-							src="/@src/assets/illustrations/login/creciendoseguro.svg"
+							src="/@src/assets/illustrations/login/Logo-IBERO-nuevo.png"
 							alt=""
 						/>
 					</div>
