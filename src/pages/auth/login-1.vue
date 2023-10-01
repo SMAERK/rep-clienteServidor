@@ -21,6 +21,7 @@ const userSession = useUserSession();
 const redirect = route.query.redirect as string;
 import { useI18n } from "vue-i18n";
 import { Message } from "yup/lib/types";
+import { email } from "@vuelidate/validators";
 const { locale, t } = useI18n();
 const defaultLocale = useStorage("locale", navigator?.language || "es-MX");
 
@@ -39,16 +40,26 @@ const handleLogin = async () => {
 	try {
 		isLoading.value = true;
 
-		const response = await usercore.login({
-			email: form.value.email,
-			password: form.value.password,
-			name: form.value.name,
-			dob: form.value.dob,
-			last_name: form.value.last_name,
-			phone: form.value.phone,
-		});
-
-		result.value = response.data.dataInfo;
+		if (
+			form.value.email &&
+			form.value.password &&
+			form.value.name &&
+			form.value.dob &&
+			form.value.last_name &&
+			form.value.phone
+		) {
+			const response = await usercore.login({
+				email: form.value.email,
+				password: form.value.password,
+				name: form.value.name,
+				dob: form.value.dob,
+				last_name: form.value.last_name,
+				phone: form.value.phone,
+			});
+			result.value = response.data.dataInfo;
+		} else {
+			notif.error("Por favor complete todos los campos");
+		}
 
 		isLoading.value = false;
 	} catch (e: any) {
