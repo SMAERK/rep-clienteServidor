@@ -2,8 +2,6 @@
 import { ref } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import { useHead } from "@vueuse/head";
-import LoginForm from "/@src/pages/auth/components/LoginForm.vue";
-import ResetForm from "/@src/pages/auth/components/ResetForm.vue";
 import * as usercore from "/@src/services/usercore";
 import { useDarkmode } from "/@src/stores/darkmode";
 import { useUserSession } from "/@src/stores/userSession";
@@ -22,6 +20,7 @@ import { useStorage } from "@vueuse/core";
 const userSession = useUserSession();
 const redirect = route.query.redirect as string;
 import { useI18n } from "vue-i18n";
+import { Message } from "yup/lib/types";
 const { locale, t } = useI18n();
 const defaultLocale = useStorage("locale", navigator?.language || "es-MX");
 
@@ -34,6 +33,8 @@ const form = ref({
 	phone: "",
 });
 
+const result = ref("");
+
 const handleLogin = async () => {
 	try {
 		isLoading.value = true;
@@ -41,23 +42,13 @@ const handleLogin = async () => {
 		const response = await usercore.login({
 			email: form.value.email,
 			password: form.value.password,
+			name: form.value.name,
+			dob: form.value.dob,
+			last_name: form.value.last_name,
+			phone: form.value.phone,
 		});
 
-		const dataUser = response.data;
-		const token = response.token;
-		const resfreshToken = response.refreshToken;
-
-		if (dataUser) {
-			localStorage.setItem("user", JSON.stringify(dataUser));
-			localStorage.setItem("token", token);
-			localStorage.setItem("refreshToken", resfreshToken);
-
-			userSession.setUser(dataUser);
-			if (route.query.redirect) router.replace(route.query.redirect as string);
-			else router.replace("/sidebar/dashboards/banking-3");
-		} else {
-			notif.error("Credenciales incorrectas");
-		}
+		result.value = response.data.dataInfo;
 
 		isLoading.value = false;
 	} catch (e: any) {
@@ -67,7 +58,7 @@ const handleLogin = async () => {
 };
 
 useHead({
-	title: "Creciendo Seguro",
+	title: "Erika Contreras & Anny Moreno",
 });
 
 watch(locale, () => {
@@ -111,6 +102,9 @@ watch(locale, () => {
 							<div class="column is-7" style="margin-left: 15%">
 								<div class="auth-content" style="text-align: center">
 									<h2 style="color: #ffff; font-size: 25px">Regristro de Nuevos Estudiantes</h2>
+									<h1 style="color: #ffff; font-size: 15px">
+										Erika Julieth Contreras & Anny Gabriela Moreno
+									</h1>
 								</div>
 								<br />
 								<br />
@@ -156,6 +150,17 @@ watch(locale, () => {
 											<VField>
 												<VControl icon="feather:user">
 													<input
+														v-model="form.phone"
+														class="input"
+														type="number"
+														placeholder="Telefono"
+														autocomplete="username"
+													/>
+												</VControl>
+											</VField>
+											<VField>
+												<VControl icon="feather:user">
+													<input
 														v-model="form.email"
 														class="input"
 														type="text"
@@ -192,6 +197,10 @@ watch(locale, () => {
 												</VButton>
 											</VControl>
 										</div>
+										<br />
+										<VMessage color="success" v-if="result"
+											>Los datos ingresados son: {{ result }}</VMessage
+										>
 									</form>
 								</div>
 							</div>
